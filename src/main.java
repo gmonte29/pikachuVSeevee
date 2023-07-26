@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class main {
-
     public static void main(String[] args) {
         //Pokemon objects created
         pokemon pikachu = new pokemon("Pikachu", 200, 30, 90);

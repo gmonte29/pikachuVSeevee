@@ -5,7 +5,7 @@ public class battle_moves {
     //userAttack method, asks for selection than calls attack method with chosen attack
     public void attack_selection(pokemon sender, pokemon receiver, Boolean computer_turn){
         if (computer_turn){
-            int index = (int) (Math.random() * (3 - 0 + 1)) + 0;
+            int index = (int) (Math.random() * (3 - 0 + 1));
             attack(receiver, sender.move_set[index]);
         }
         else{
