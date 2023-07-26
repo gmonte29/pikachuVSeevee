@@ -1,28 +1,21 @@
 import java.util.Scanner;
 
-public class PvE {
+public class sequence {
+    pokemon first;
+    pokemon second;
+    battle_moves bm;
 
-    public static void main(String[] args) {
+    public sequence(pokemon user, pokemon other){
+        this.first = user;
+        this.second = other;
+        this.bm = new battle_moves();
+    }
 
-        //Pokemon objects created
-        pokemon pikachu = new pokemon("Pikachu", 200, 30, 90);
-        pokemon eevee = new pokemon("Eevee", 200, 50, 55);
-
-        //Set up four attacks for each pokemon
-        pikachu.oneSet("Light Screen", 0, 50);
-        pikachu.twoSet("Thunder", 120, 0);
-        pikachu.threeSet("Agility", 0, 50);
-        pikachu.fourSet("Thunder Bolt", 95, 0);
-
-        eevee.oneSet("Take Down", 90, 0);
-        eevee.twoSet("Focus Energy", 0, 50);
-        eevee.threeSet("Bite", 60, 0);
-        eevee.fourSet("Quick Attack", 40, 0);
-
+    public void run_sequence(){
         // Requests the user to choose a pokemon to use in the battle
         System.out.println("Pokemon selection for battle; Eevee or Pikachu?");
-        System.out.println("[1] Pikachu");
-        System.out.println("[2] Eevee");
+        System.out.println("[1]"+first.pokemonName);
+        System.out.println("[2]"+second.pokemonName);
 
         //section where user determines which pokemon to use and sets the computer to the other choice
         Scanner sc = new Scanner(System.in);
@@ -31,11 +24,11 @@ public class PvE {
         pokemon computer;
 
         if (userPokemon == 1) {
-            user = pikachu;
-            computer = eevee;
+            user = first;
+            computer = second;
         } else {
-            user = eevee;
-            computer = pikachu;
+            user = second;
+            computer = first;
         }
 
         //while loop goes through each turn consisting of an attack by both pokemon
@@ -48,12 +41,12 @@ public class PvE {
             else other = user;
 
             //user or computer attack methods called based on who's turn it is
-            if(turn == user) turn.userAttack(other);
-            else turn.computerAttack(other);
+            if(turn == user) bm.attack_selection(user, other, false);
+            else bm.attack_selection(other, user, true);
 
             //method to end battle if other Pokemon's health <= zero
             if(other.pokemonHealth<=0){
-                turn.battleEnd(other);
+                bm.battleEnd(turn, other);
                 break;
             }
             //after each attack the status of the receiving Pokemon is shown
@@ -65,7 +58,7 @@ public class PvE {
             turn = other;
             other = temp;
 
-            if(turn == user) turn.userAttack(other);
+            if(turn == user) bm.attack_selection(user,other);
             else turn.computerAttack(other);
 
             if(other.pokemonHealth<=0){
