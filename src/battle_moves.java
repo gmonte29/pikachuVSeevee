@@ -18,6 +18,11 @@ public class battle_moves {
 
             Scanner move = new Scanner(System.in);
             int selection = move.nextInt();
+
+            if (user.move_set[selection-1]==null){
+                throw new IndexOutOfBoundsException("no move in selected slot");
+            }
+
             if(selection ==1) attack(computer, user.move_set[0]);
             if(selection ==2) attack(computer, user.move_set[1]);
             if(selection ==3) attack(computer, user.move_set[2]);

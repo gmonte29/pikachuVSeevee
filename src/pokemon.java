@@ -9,6 +9,9 @@ public class pokemon {
 
     //constructor to create Pokemon object
     public pokemon (String name, int health, int defense, int speed){
+        if (health < 1 || defense < 0 || speed < 0){
+            throw new IllegalArgumentException();
+        }
         pokemonName = name;
         pokemonHealth = health;
         pokemonDefense = defense;

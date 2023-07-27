@@ -4,11 +4,13 @@ public class sequence {
     pokemon first;
     pokemon second;
     battle_moves bm;
+    Boolean battle_on;
 
     public sequence(pokemon first, pokemon second){
         this.first = first;
         this.second = second;
         this.bm = new battle_moves();
+        battle_on = true;
     }
 
     public Boolean send_attack(pokemon user, pokemon computer, Boolean comp){
@@ -73,6 +75,7 @@ public class sequence {
             }
 
         }
+        battle_on = false;
         sc.close();
     }
 }
