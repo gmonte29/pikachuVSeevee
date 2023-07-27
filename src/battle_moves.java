@@ -27,7 +27,9 @@ public class battle_moves {
 
     //decrease computer pokemon health by chosen attack * random less other defense stat * random
     public void attack(pokemon other, attacks attack){
-        other.pokemonHealth -= (Math.max(0,attack.attackPower*Math.random()- other.pokemonDefense*Math.random()));
+        //line determines amount of damage done, subtacts receiving pokemon defense from attack power
+        // minimum possible attack damage is 10
+        other.pokemonHealth -= (Math.max(10,attack.attackPower*Math.random()- other.pokemonDefense*Math.random()));
     }
 
     public void battleEnd(pokemon p, pokemon other){
