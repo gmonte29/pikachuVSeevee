@@ -5,15 +5,15 @@ public class sequence {
     pokemon second;
     battle_moves bm;
 
-    public sequence(pokemon user, pokemon other){
-        this.first = user;
-        this.second = other;
+    public sequence(pokemon first, pokemon second){
+        this.first = first;
+        this.second = second;
         this.bm = new battle_moves();
     }
 
     public Boolean send_attack(pokemon user, pokemon computer, Boolean comp){
         //user or computer attack methods called based on who's turn it is
-        if(comp) bm.attack_selection(computer, user, true);
+        if(comp) bm.attack_selection(user, computer, true);
         else bm.attack_selection(user, computer, false);
 
         //method to end battle if other Pokemon's health <= zero
@@ -21,6 +21,7 @@ public class sequence {
             bm.battleEnd(computer, user);
             return true;
         }
+
         //method to end battle if other Pokemon's health <= zero
         if(!comp && computer.pokemonHealth<=0){
             bm.battleEnd(user, computer);
@@ -28,9 +29,11 @@ public class sequence {
         }
 
         //after each attack the status of the receiving Pokemon is shown
-        if (comp) System.out.println(user.pokemonName +" health: "+(int)user.pokemonHealth);
-        else System.out.println(computer.pokemonName +" health: "+(int)computer.pokemonHealth);
-        System.out.println();
+        if (comp) {
+            System.out.println(user.pokemonName +" health: "+ user.pokemonHealth);
+        }
+        else System.out.println(computer.pokemonName +" health: "+ computer.pokemonHealth);
+        System.out.println("-------------------");
         return false;
     }
 
@@ -59,13 +62,13 @@ public class sequence {
         while (user.pokemonHealth > 0 && computer.pokemonHealth > 0) {
             //line where first attacker is determined
             pokemon turn = user.pokemonSpeed*Math.random() > computer.pokemonSpeed*Math.random() ? user : computer;
-            pokemon other;
+
             if(turn == user) {
                 if (send_attack(user, computer, false)) break;
-                if (send_attack(computer, user, true)) break;
+                if (send_attack(user, computer, true)) break;
             }
             else {
-                if (send_attack(computer, user, true)) break;
+                if (send_attack(user, computer, true)) break;
                 if (send_attack(user, computer, false)) break;
             }
 

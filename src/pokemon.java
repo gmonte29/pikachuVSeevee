@@ -2,13 +2,13 @@ import java.util.*;
 
 public class pokemon {
     String pokemonName;
-    double pokemonHealth;
+    int pokemonHealth;
     int pokemonDefense;
     int pokemonSpeed;
     attacks [] move_set;
 
     //constructor to create Pokemon object
-    public pokemon (String name, double health, int defense, int speed){
+    public pokemon (String name, int health, int defense, int speed){
         pokemonName = name;
         pokemonHealth = health;
         pokemonDefense = defense;
