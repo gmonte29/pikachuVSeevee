@@ -19,11 +19,11 @@ public class pokemon {
         move_set = new attacks[4];
     }
 
-    public void set_move(int index, String name, int health, int status){
+    public void set_move(int index, String name, int power, int status){
         if (index >= 4 || index < 0) {
             throw new IllegalArgumentException("Incorrect Index");
         }
-        move_set[index] = new attacks(name, health, status);
+        move_set[index] = new attacks(name, power, status);
     }
 
 }

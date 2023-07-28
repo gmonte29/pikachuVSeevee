@@ -16,9 +16,12 @@ public class Tests {
     public void test_attack_damage(){
         temp_pokemon = new pokemon("test",100, 100,100 );
         int original_health = temp_pokemon.pokemonHealth;
+
         bm = new battle_moves();
         bm.attack(temp_pokemon, new attacks("test", 50, 0));
 
+        System.out.println(original_health);
+        System.out.print(temp_pokemon.pokemonHealth);
         assertTrue(temp_pokemon.pokemonHealth < original_health);
     }
 
@@ -31,19 +34,18 @@ public class Tests {
 
     @Test
     public void test_battle_ends() {
-        temp_pokemon = new pokemon("test",5, 0,0);
-        temp_pokemon_1 = new pokemon("test",5, 0,50);
-        temp_pokemon_1.move_set[0] = new attacks("", 50, 0);
+        temp_pokemon = new pokemon("", 5,0,0);
+        temp_pokemon_1 = new pokemon("", 50, 0, 0);
+        bm = new battle_moves();
+
+        bm.attack(temp_pokemon, new attacks("", 50, 0));
 
         temp_sequence = new sequence(temp_pokemon, temp_pokemon_1);
+        temp_sequence.run_sequence(temp_pokemon, temp_pokemon_1);
 
-        List<Integer> stream = Arrays.asList(2, 0);
-        Iterator<Integer> input = stream.iterator();
-
-
-        Scanner sc = new Scanner(input.);
-
+        assertFalse(temp_sequence.battle_on);
 
     }
+
 
 }

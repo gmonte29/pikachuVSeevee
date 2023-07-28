@@ -16,6 +16,6 @@ public class main {
         eevee.set_move(3, "Quick Attack", 40, 0);
 
         sequence go = new sequence(pikachu, eevee);
-        go.run_sequence();
+        go.user_select();
     }
 }

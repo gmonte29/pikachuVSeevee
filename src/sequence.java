@@ -13,33 +13,7 @@ public class sequence {
         battle_on = true;
     }
 
-    public Boolean send_attack(pokemon user, pokemon computer, Boolean comp){
-        //user or computer attack methods called based on who's turn it is
-        if(comp) bm.attack_selection(user, computer, true);
-        else bm.attack_selection(user, computer, false);
-
-        //method to end battle if other Pokemon's health <= zero
-        if(comp && user.pokemonHealth<=0){
-            bm.battleEnd(computer, user);
-            return true;
-        }
-
-        //method to end battle if other Pokemon's health <= zero
-        if(!comp && computer.pokemonHealth<=0){
-            bm.battleEnd(user, computer);
-            return true;
-        }
-
-        //after each attack the status of the receiving Pokemon is shown
-        if (comp) {
-            System.out.println(user.pokemonName +" health: "+ user.pokemonHealth);
-        }
-        else System.out.println(computer.pokemonName +" health: "+ computer.pokemonHealth);
-        System.out.println("-------------------");
-        return false;
-    }
-
-    public void run_sequence(){
+    public void user_select(){
         // Requests the user to choose a pokemon to use in the battle
         System.out.println("Pokemon selection for battle; Eevee or Pikachu?");
         System.out.println("[1]"+first.pokemonName);
@@ -59,23 +33,30 @@ public class sequence {
             computer = first;
         }
 
+        run_sequence(user, computer);
+
+    }
+
+    public void run_sequence(pokemon user, pokemon computer){
+
         //while loop goes through each turn consisting of an attack by both pokemon
         //the pokemon with the first turn determined through speed stat multiplied by random method
         while (user.pokemonHealth > 0 && computer.pokemonHealth > 0) {
             //line where first attacker is determined
-            pokemon turn = user.pokemonSpeed*Math.random() > computer.pokemonSpeed*Math.random() ? user : computer;
+            double user_speed = user.pokemonSpeed + user.pokemonSpeed*.1*(Math.random()*2-1);
+            double computer_speed = computer.pokemonSpeed + computer.pokemonSpeed*.1*(Math.random()*2-1);
+
+            pokemon turn = user_speed > computer_speed ? user : computer;
 
             if(turn == user) {
-                if (send_attack(user, computer, false)) break;
-                if (send_attack(user, computer, true)) break;
+                if (bm.attack_selection(user, computer, false)) break;
+                if (bm.attack_selection(user, computer, true)) break;
             }
             else {
-                if (send_attack(user, computer, true)) break;
-                if (send_attack(user, computer, false)) break;
+                if (bm.attack_selection(user, computer, true)) break;
+                if (bm.attack_selection(user, computer, false)) break;
             }
-
         }
         battle_on = false;
-        sc.close();
     }
 }
