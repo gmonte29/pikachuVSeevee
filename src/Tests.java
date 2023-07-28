@@ -1,8 +1,6 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.*;
-import java.io.*;
 
 
 public class Tests {
@@ -20,8 +18,6 @@ public class Tests {
         bm = new battle_moves();
         bm.attack(temp_pokemon, new attacks("test", 50, 0));
 
-        System.out.println(original_health);
-        System.out.print(temp_pokemon.pokemonHealth);
         assertTrue(temp_pokemon.pokemonHealth < original_health);
     }
 
